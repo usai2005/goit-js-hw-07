@@ -35,27 +35,46 @@ function onGalleryContainerClick(e) {
         return;
     }
 
-    excludeDefaultAction(e);    
+    excludeDefaultAction(e);
     
+    // CREATING LARGE IMG FOR MODAL
     const instance = basicLightbox.create(`
-    <img src="${e.target.dataset.source}" width="800" height="600">
-`);
+    <img src="${e.target.dataset.source}" width="800" height="600">`,
+        {
+
+            // ADDING LISTENER ON KEYBOARD
+            onShow: () => {
+
+                document.addEventListener('keydown', handleModalClose)
+            
+            },
+
+            // REMOVING LISTENER FROM KEYBOARD
+            onClose: () => {
+
+                document.removeEventListener('keydown', handleModalClose);
+    
+            },
+        }
+    );
+    
     instance.show();
 
-    //CLOSING MODAL WINDOW BY CLICKING ESC
+    // CLOSING MODAL WINDOW BY CLICKING ESC
 
-    galleryContainer.addEventListener('keydown', (e) => {
-
-        if (e.code === "Escape") {
-
-        instance.close();
+    function handleModalClose(e) {
+        console.log(e);    
+        
+        if (e.code === 'Escape') {
+        
+            instance.close();
+           
         };
-    });
-};
+    };
 
-//  CANCELING BROWSER BEHAVIOR BY PREVENTDEFAULT
-function excludeDefaultAction(e) {
-e.preventDefault();
-};
+    // CANCELING BROWSER BEHAVIOR BY PREVENTDEFAULT
 
-
+    function excludeDefaultAction(e) {
+        e.preventDefault();
+    };
+}

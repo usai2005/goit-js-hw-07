@@ -24,23 +24,4 @@ function itemsMarkupCreating(galleryItems) {
     }).join('');
 };
 
-galleryContainer.addEventListener('click', onGalleryContainerClick);
-
-// CHECKING IF WE CLICK ON AN IMAGE, OPEN MODAL WINDOW
-
-function onGalleryContainerClick(e) {
-    
-    if (!e.target.classList.contains('gallery__image')) {
-        return;
-    }
-
-    excludeDefaultAction(e);    
-    
-    const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
-
-};
-
-//  CANCELING BROWSER BEHAVIOR BY PREVENTDEFAULT
-function excludeDefaultAction(e) {
-e.preventDefault();
-};
+const lightbox = new SimpleLightbox('.gallery a', { captionsData: 'alt', captionDelay: 250 });
